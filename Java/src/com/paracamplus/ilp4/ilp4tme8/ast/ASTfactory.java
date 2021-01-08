@@ -7,22 +7,17 @@ public class ASTfactory extends com.paracamplus.ilp4.ast.ASTfactory implements I
 
 	@Override
 	public IASTexpression newReadProperty(IASTexpression object, IASTexpression property) {
-		// TODO Auto-generated method stub
-		return null;
+		return new ASTreadProperty(object, property);
 	}
 
 	@Override
 	public IASTexpression newWriteProperty(IASTexpression object, IASTexpression property, IASTexpression value) {
-		// TODO Auto-generated method stub
-		return null;
+		return new ASTwriteProperty(object, property, value);
 	}
 
 	@Override
 	public IASTexpression newHasProperty(IASTexpression object, IASTexpression property) {
-		// TODO Auto-generated method stub
-		return null;
+		return new ASThasProperty(object, property);
 	}
-
-
 
 }
