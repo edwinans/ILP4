@@ -60,81 +60,81 @@ public class Compiler extends com.paracamplus.ilp4.compiler.Compiler
 
 	@Override
 	public Void visit(IASTreadProperty iast, Context context) throws CompilationException {
-        emit("{ \n");
-        IASTvariable tmpInstance = context.newTemporaryVariable();
-        emit("  ILP_Object " + tmpInstance.getMangledName() + "; \n");
-        Context c = context.redirect(new AssignDestination(tmpInstance));
-        iast.getObject().accept(this, c);
-        
-        IASTvariable tmpProperty = context.newTemporaryVariable();
-        emit("  ILP_Object " + tmpProperty.getMangledName() + "; \n");
-        c = context.redirect(new AssignDestination(tmpProperty));
-        iast.getProperty().accept(this, c);
-        
-        emit(context.destination.compile());
-        emit("ILP_read_property(");
-        emit(tmpInstance.getMangledName());
-        emit(", ");
-        emit(tmpProperty.getMangledName());
-        emit(");");
-        emit("}\n");
-        
-        return null;
+		emit("{ \n");
+		IASTvariable tmpInstance = context.newTemporaryVariable();
+		emit("  ILP_Object " + tmpInstance.getMangledName() + "; \n");
+		Context c = context.redirect(new AssignDestination(tmpInstance));
+		iast.getObject().accept(this, c);
+
+		IASTvariable tmpProperty = context.newTemporaryVariable();
+		emit("  ILP_Object " + tmpProperty.getMangledName() + "; \n");
+		c = context.redirect(new AssignDestination(tmpProperty));
+		iast.getProperty().accept(this, c);
+
+		emit(context.destination.compile());
+		emit("ILP_read_property(");
+		emit(tmpInstance.getMangledName());
+		emit(", ");
+		emit(tmpProperty.getMangledName());
+		emit(");");
+		emit("}\n");
+
+		return null;
 	}
 
 	@Override
 	public Void visit(IASThasProperty iast, Context context) throws CompilationException {
-        emit("{ \n");
-        IASTvariable tmpInstance = context.newTemporaryVariable();
-        emit("  ILP_Object " + tmpInstance.getMangledName() + "; \n");
-        Context c = context.redirect(new AssignDestination(tmpInstance));
-        iast.getObject().accept(this, c);
-        
-        IASTvariable tmpProperty = context.newTemporaryVariable();
-        emit("  ILP_Object " + tmpProperty.getMangledName() + "; \n");
-        c = context.redirect(new AssignDestination(tmpProperty));
-        iast.getProperty().accept(this, c);
-        
-        emit(context.destination.compile());
-        emit("ILP_has_property(");
-        emit(tmpInstance.getMangledName());
-        emit(", ");
-        emit(tmpProperty.getMangledName());
-        emit(");");
-        emit("}\n");
-        
-        return null;
+		emit("{ \n");
+		IASTvariable tmpInstance = context.newTemporaryVariable();
+		emit("  ILP_Object " + tmpInstance.getMangledName() + "; \n");
+		Context c = context.redirect(new AssignDestination(tmpInstance));
+		iast.getObject().accept(this, c);
+
+		IASTvariable tmpProperty = context.newTemporaryVariable();
+		emit("  ILP_Object " + tmpProperty.getMangledName() + "; \n");
+		c = context.redirect(new AssignDestination(tmpProperty));
+		iast.getProperty().accept(this, c);
+
+		emit(context.destination.compile());
+		emit("ILP_has_property(");
+		emit(tmpInstance.getMangledName());
+		emit(", ");
+		emit(tmpProperty.getMangledName());
+		emit(");");
+		emit("}\n");
+
+		return null;
 	}
-	
+
 	@Override
 	public Void visit(IASTwriteProperty iast, Context context) throws CompilationException {
-        emit("{ \n");
-        IASTvariable tmpInstance = context.newTemporaryVariable();
-        emit("  ILP_Object " + tmpInstance.getMangledName() + "; \n");
-        Context c = context.redirect(new AssignDestination(tmpInstance));
-        iast.getObject().accept(this, c);
-        
-        IASTvariable tmpProperty = context.newTemporaryVariable();
-        emit("  ILP_Object " + tmpProperty.getMangledName() + "; \n");
-        c = context.redirect(new AssignDestination(tmpProperty));
-        iast.getProperty().accept(this, c);
-        
-        IASTvariable tmpValue = context.newTemporaryVariable();
-        emit("  ILP_Object " + tmpValue.getMangledName() + "; \n");
-        c = context.redirect(new AssignDestination(tmpValue));
-        iast.getValue().accept(this, c);
-        
-        emit(context.destination.compile());
-        emit("ILP_write_property(");
-        emit(tmpInstance.getMangledName());
-        emit(", ");
-        emit(tmpProperty.getMangledName());
-        emit(", ");
-        emit(tmpValue.getMangledName());
-        emit(");");
-        emit("}\n");
-        
-        return null;
+		emit("{ \n");
+		IASTvariable tmpInstance = context.newTemporaryVariable();
+		emit("  ILP_Object " + tmpInstance.getMangledName() + "; \n");
+		Context c = context.redirect(new AssignDestination(tmpInstance));
+		iast.getObject().accept(this, c);
+
+		IASTvariable tmpProperty = context.newTemporaryVariable();
+		emit("  ILP_Object " + tmpProperty.getMangledName() + "; \n");
+		c = context.redirect(new AssignDestination(tmpProperty));
+		iast.getProperty().accept(this, c);
+
+		IASTvariable tmpValue = context.newTemporaryVariable();
+		emit("  ILP_Object " + tmpValue.getMangledName() + "; \n");
+		c = context.redirect(new AssignDestination(tmpValue));
+		iast.getValue().accept(this, c);
+
+		emit(context.destination.compile());
+		emit("ILP_write_property(");
+		emit(tmpInstance.getMangledName());
+		emit(", ");
+		emit(tmpProperty.getMangledName());
+		emit(", ");
+		emit(tmpValue.getMangledName());
+		emit(");");
+		emit("}\n");
+
+		return null;
 	}
 
 }

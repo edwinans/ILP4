@@ -34,47 +34,48 @@ import com.paracamplus.ilp4.ilp4tme8.compiler.Compiler;
 
 @RunWith(Parameterized.class)
 public class CompilerTest extends com.paracamplus.ilp4.compiler.test.CompilerTest {
-    
-    protected static String[] samplesDirName = { "SamplesTME8" };
-    //"SamplesILP4", "SamplesILP3", "SamplesILP2", "SamplesILP1"
-    protected static String pattern = ".*\\.ilpml";
-    protected static String scriptCommand = "Java/src/com/paracamplus/ilp4/ilp4tme8/C/compileThenRun.sh";
-    
-    public CompilerTest(final File file) {
-    	super(file);
-    }    
 
-    public void configureRunner(CompilerRunner run) throws CompilationException {
-    	// configuration du parseur
-        IASTfactory factory = new ASTfactory();
-        IXMLParser xmlparser = new XMLParser(factory);
-        xmlparser.setGrammar(new File(XMLgrammarFile));
-        run.setXMLParser(xmlparser);
-        run.setILPMLParser(new ILPMLParser(factory));
-    	
-        // configuration du compilateur
-        IOperatorEnvironment ioe = new OperatorEnvironment();
-        OperatorStuff.fillUnaryOperators(ioe);
-        OperatorStuff.fillBinaryOperators(ioe);
-        IGlobalVariableEnvironment gve = new GlobalVariableEnvironment();
-        GlobalVariableStuff.fillGlobalVariables(gve);
-        Compiler compiler = new Compiler(ioe, gve);
-        compiler.setOptimizer(new IdentityOptimizer());
-        run.setCompiler(compiler);
+	protected static String[] samplesDirName = { "SamplesTME8", "SamplesILP4", "SamplesILP3", "SamplesILP2",
+			"SamplesILP1" };
 
-        // configuration du script de compilation et exécution
-        run.setRuntimeScript(scriptCommand);    	
-    }
-    
-    @Parameters(name = "{0}")
-    public static Collection<File[]> data() throws Exception {
-    	return CompilerRunner.getFileList(samplesDirName, pattern);
-    }    	
-    
-    @Test
-    public void processFile() throws CompilationException, ParseException, IOException {
-    	CompilerRunner run = new CompilerRunner();
-    	configureRunner(run);
-        run.checkPrintingAndResult(file, run.compileAndRun(file));	
-    }
+	protected static String pattern = ".*\\.ilpml";
+	protected static String scriptCommand = "Java/src/com/paracamplus/ilp4/ilp4tme8/C/compileThenRun.sh";
+
+	public CompilerTest(final File file) {
+		super(file);
+	}
+
+	public void configureRunner(CompilerRunner run) throws CompilationException {
+		// configuration du parseur
+		IASTfactory factory = new ASTfactory();
+		IXMLParser xmlparser = new XMLParser(factory);
+		xmlparser.setGrammar(new File(XMLgrammarFile));
+		run.setXMLParser(xmlparser);
+		run.setILPMLParser(new ILPMLParser(factory));
+
+		// configuration du compilateur
+		IOperatorEnvironment ioe = new OperatorEnvironment();
+		OperatorStuff.fillUnaryOperators(ioe);
+		OperatorStuff.fillBinaryOperators(ioe);
+		IGlobalVariableEnvironment gve = new GlobalVariableEnvironment();
+		GlobalVariableStuff.fillGlobalVariables(gve);
+		Compiler compiler = new Compiler(ioe, gve);
+		compiler.setOptimizer(new IdentityOptimizer());
+		run.setCompiler(compiler);
+
+		// configuration du script de compilation et exécution
+		run.setRuntimeScript(scriptCommand);
+	}
+
+	@Parameters(name = "{0}")
+	public static Collection<File[]> data() throws Exception {
+		return CompilerRunner.getFileList(samplesDirName, pattern);
+	}
+
+	@Test
+	public void processFile() throws CompilationException, ParseException, IOException {
+		CompilerRunner run = new CompilerRunner();
+		configureRunner(run);
+		run.checkPrintingAndResult(file, run.compileAndRun(file));
+	}
 }
