@@ -48,8 +48,7 @@ expr returns [com.paracamplus.ilp1.interfaces.IASTexpression node]
 
 // ajouts (avec priorité élevée)
 	| obj=expr '[' property=expr ']' # ReadProperty
-	| obj=expr '[' property=expr ']' '=' value=expr # WriteProperty
-	| obj=expr 'has' property=expr # HasProperty
+	
 
 // objets spéciaux
     | 'self'    # Self
@@ -80,6 +79,9 @@ expr returns [com.paracamplus.ilp1.interfaces.IASTexpression node]
     | var=IDENT # Variable
 
 // ajout (avec priorité plus faible)
+	| obj=expr '[' property=expr ']' '=' value=expr # WriteProperty
+	| obj=expr 'has' property=expr # HasProperty
+	
 // affectation d'un attribut d'objet
     | obj=expr '.' field=IDENT '=' val=expr # WriteField
 
