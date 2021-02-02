@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<!--
+Accès réflexif aux champs d'un objet.
+Lecture, propriété calculée.
+-->
+
+<program>
+  <!--
+      class Test extends Object {
+          field x0;
+          method getX0() { x0 }
+      }
+  -->
+  <classDefinition name='Test' parent='Object'>
+    <fields>
+      <field name='x0'/>
+    </fields>
+    <methods>
+      <method name='getX0'>
+        <variables/>
+        <body>
+          <fieldRead field='x0'><target><self/></target></fieldRead>
+        </body>
+      </method>
+    </methods>
+  </classDefinition>  
+
+  <block>
+    <bindings>
+      <!-- let o1 = new Test (1) -->
+      <binding>
+        <variable name='o1'/>
+        <initialisation>
+          <instantiation class='Test'>
+            <integer value='1'/>
+          </instantiation>
+        </initialisation>
+      </binding>
+      <binding>
+        <variable name="p"/>
+        <initialisation><string>x</string></initialisation>
+      </binding>            
+    </bindings>
+
+    <body>
+
+      <!-- print o1.(p+"0") -->
+      <invocation>
+        <function><variable name="print"/></function>
+        <arguments>
+          <readProperty>
+            <target><variable name='o1'/></target>
+            <property>
+              <binaryOperation operator='+'>
+                <leftOperand><variable name='p'/></leftOperand>
+                <rightOperand><string>0</string></rightOperand>
+              </binaryOperation>
+            </property>
+          </readProperty>
+        </arguments>
+      </invocation>
+
+    </body>
+  </block>
+  
+</program>

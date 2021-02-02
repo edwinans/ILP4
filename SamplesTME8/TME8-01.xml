@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<!--
+Accès réflexif aux champs d'un objet.
+Test d'existence.
+-->
+
+<program>
+  <!--
+      class Test extends Object {
+          field x0;
+          method getX0() { x0 }
+      }
+  -->
+  <classDefinition name='Test' parent='Object'>
+    <fields>
+      <field name='x0'/>
+    </fields>
+    <methods>
+      <method name='getX0'>
+        <variables/>
+        <body>
+          <fieldRead field='x0'><target><self/></target></fieldRead>
+        </body>
+      </method>
+    </methods>
+  </classDefinition>  
+
+  <block>
+    <bindings>
+      <!-- let o1 = new Test (1) -->
+      <binding>
+        <variable name='o1'/>
+        <initialisation>
+          <instantiation class='Test'>
+            <integer value='1'/>
+          </instantiation>
+        </initialisation>
+      </binding>
+    </bindings>
+
+    <body>
+      <!-- print o1.x0 -->
+      <invocation>
+        <function><variable name="print"/></function>
+        <arguments><fieldRead field='x0'><target><variable name='o1'/></target></fieldRead></arguments>
+      </invocation>
+      <invocation><function><variable name="newline"/></function><arguments/></invocation>
+      
+      <!-- print o1.getX0() -->
+      <invocation>
+        <function><variable name="print"/></function>
+        <arguments><send message='getX0'><receiver><variable name='o1'/></receiver><arguments/></send></arguments>
+      </invocation>
+      <invocation><function><variable name="newline"/></function><arguments/></invocation>
+
+      <!-- print o1 has "x0" -->
+      <invocation>
+        <function><variable name="print"/></function>
+        <arguments><hasProperty><target><variable name='o1'/></target><property><string>x0</string></property></hasProperty></arguments>
+      </invocation>
+      <invocation><function><variable name="newline"/></function><arguments/></invocation>
+
+      <!-- print o1 has "x1" -->
+      <invocation>
+        <function><variable name="print"/></function>
+        <arguments><hasProperty><target><variable name='o1'/></target><property><string>x1</string></property></hasProperty></arguments>
+      </invocation>
+
+    </body>
+  </block>
+  
+</program>

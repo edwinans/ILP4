@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<!--
+Accès réflexif aux champs d'un objet.
+Test de lecture d'un champ n'existant pas (exception)
+-->
+
+<program>
+  <!--
+      class Test extends Object {
+          field x0;
+          method getX0() { x0 }
+      }
+  -->
+  <classDefinition name='Test' parent='Object'>
+    <fields>
+      <field name='x0'/>
+    </fields>
+    <methods>
+      <method name='getX0'>
+        <variables/>
+        <body>
+          <fieldRead field='x0'><target><self/></target></fieldRead>
+        </body>
+      </method>
+    </methods>
+  </classDefinition>  
+
+  <block>
+    <bindings>
+      <!-- let o1 = new Test (1) -->
+      <binding>
+        <variable name='o1'/>
+        <initialisation>
+          <instantiation class='Test'>
+            <integer value='1'/>
+          </instantiation>
+        </initialisation>
+      </binding>
+    </bindings>
+
+    <body>
+      <try>
+        <body>
+          <!-- o1.x1 -->
+          <readProperty><target><variable name='o1'/></target><property><string>x1</string></property></readProperty>
+          <!-- print "BAD" -->
+          <invocation>
+            <function><variable name="print"/></function>
+            <arguments><string>BAD</string></arguments>
+          </invocation>
+        </body>
+        <catch exception='e'>
+          <!-- print "OK" -->
+          <invocation>
+            <function><variable name="print"/></function>
+            <arguments><string>OK</string></arguments>
+          </invocation>
+        </catch>
+      </try>
+    </body>
+  </block>
+  
+</program>

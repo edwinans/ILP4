@@ -1,0 +1,10 @@
+class Test extends Object {
+   var x0;
+   method getX0() ( self.x0 );
+}
+
+class Toto { var x1; }
+
+let o1 = new Test (1) in
+try ( o1.x1; print "BAD" )
+catch (e) print("OK")

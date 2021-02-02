@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<!--
+Accès réflexif aux champs d'un objet.
+Test d'écriture d'un champ non-déclaré, héritage
+-->
+
+<program>
+  <!--
+      class Test extends Object {
+          field x0;
+      }
+  -->
+  <classDefinition name='Test' parent='Object'>
+    <fields>
+      <field name='x0'/>
+    </fields>
+    <methods/>
+  </classDefinition>  
+
+  <!--
+      class Test2 extends Test {
+          field x1;
+      }
+  -->
+  <classDefinition name='Test2' parent='Test'>
+    <fields>
+      <field name='x1'/>
+    </fields>
+    <methods/>
+  </classDefinition>  
+
+  <block>
+    <bindings>
+      <!-- let o1 = new Test2 (1,2) -->
+      <binding>
+        <variable name='o1'/>
+        <initialisation>
+          <instantiation class='Test2'>
+            <integer value='1'/>
+            <integer value='2'/>
+          </instantiation>
+        </initialisation>
+      </binding>
+    </bindings>
+    
+    <body>
+
+      <!-- print o1 has "x2" -->
+      <invocation>
+        <function><variable name="print"/></function>
+        <arguments><hasProperty><target><variable name='o1'/></target><property><string>x2</string></property></hasProperty></arguments>
+      </invocation>
+      <invocation><function><variable name="newline"/></function><arguments/></invocation>
+
+      <!-- print o1["x2"] = 42 -->
+      <invocation>
+        <function><variable name="print"/></function>
+        <arguments><writeProperty><target><variable name='o1'/></target><property><string>x2</string></property><value><integer value='42'/></value></writeProperty></arguments>
+      </invocation>
+      <invocation><function><variable name="newline"/></function><arguments/></invocation>
+
+      <!-- print o1 has "x2" -->
+      <invocation>
+        <function><variable name="print"/></function>
+        <arguments><hasProperty><target><variable name='o1'/></target><property><string>x2</string></property></hasProperty></arguments>
+      </invocation>
+      <invocation><function><variable name="newline"/></function><arguments/></invocation>
+      
+      <!-- print o1.["x2"] -->
+      <invocation>
+        <function><variable name="print"/></function>
+        <arguments><readProperty><target><variable name='o1'/></target><property><string>x2</string></property></readProperty></arguments>
+      </invocation>
+
+    </body>
+  </block>
+  
+</program>

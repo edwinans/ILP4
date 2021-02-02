@@ -1,0 +1,13 @@
+class Test extends Object {
+   var x0;
+   method getX0() ( self.x0 );
+}
+
+let o1 = new Test (1)
+and p = "x" in(
+print(o1.x0); newline();
+print(o1["x0"]); newline();
+print(o1[p+"0"]=421); newline();
+print(o1.x0); newline();
+print(o1["x0"]);
+)

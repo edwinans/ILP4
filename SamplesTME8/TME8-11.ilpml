@@ -1,0 +1,17 @@
+class Test extends Object {
+   var x0;
+}
+
+class Test2 extends Test {
+   var x1;
+}
+
+let o1 = new Test2(1,2) in (
+print(o1.x0); newline();
+print(o1 has "x0"); newline();
+print(o1["x0"]); newline();
+print(o1.x1); newline();
+print(o1 has "x1"); newline();
+print(o1["x1"]); newline();
+print(o1 has "x2");
+)
