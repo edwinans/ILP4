@@ -35,8 +35,7 @@ import com.paracamplus.ilp4.ilp4tme8.compiler.Compiler;
 @RunWith(Parameterized.class)
 public class CompilerTest extends com.paracamplus.ilp4.compiler.test.CompilerTest {
 
-	protected static String[] samplesDirName = { "SamplesTME8", "SamplesILP4", "SamplesILP3", "SamplesILP2",
-			"SamplesILP1" };
+	protected static String[] samplesDirName = { "SamplesTME8"};
 
 	protected static String pattern = ".*\\.ilpml";
 	protected static String scriptCommand = "Java/src/com/paracamplus/ilp4/ilp4tme8/C/compileThenRun.sh";

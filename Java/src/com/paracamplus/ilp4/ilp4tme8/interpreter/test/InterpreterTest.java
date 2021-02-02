@@ -34,8 +34,7 @@ import com.paracamplus.ilp4.parser.xml.XMLParser;
 @RunWith(Parameterized.class)
 public class InterpreterTest extends com.paracamplus.ilp4.interpreter.test.InterpreterTest {
 
-	protected static String[] samplesDirName = { "SamplesTME8", "SamplesILP4", "SamplesILP3", "SamplesILP2",
-			"SamplesILP1" };
+	protected static String[] samplesDirName = { "SamplesTME8"};
 
 	public InterpreterTest(final File file) {
 		super(file);
